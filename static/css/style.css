@@ -187,7 +187,7 @@ ul#menu li a:hover
   margin: 0 auto 0 auto;
   padding: 10px 20px 20px 20px;
   background: #F6F6F0 url(back.png) repeat-y;
-  border: 15px solid #FFF;} 
+} 
 .inner_copyright{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
 .sidebar
 { float: right;
@@ -216,6 +216,7 @@ ul#menu li a:hover
 { text-align: center;
   width: 70%;
 margin-left:5%;
+background-color:#fff;
   padding: 0;}
 
 #content ul
@@ -225,9 +226,14 @@ margin-left:5%;
 { list-style-type: none;
   background: url(bullet.png) no-repeat;
   margin: 0 0 0 0; 
-  padding: 0 0 4px 25px;
+  padding: 0 0 0 0 ;
   line-height: 1.5em;}
-
+#content ul {
+	float:left;
+}
+.article{
+	text-align:left;
+}
 #footer
 { width: 916px;
   font-family: 'trebuchet ms', sans-serif;

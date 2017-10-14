@@ -1,6 +1,6 @@
 package component
 
-type Page struct {
+type Pages struct {
 	PageNo     int
 	PageSize   int
 	TotalPage  int
@@ -10,10 +10,10 @@ type Page struct {
 	List       interface{}
 }
 
-func Page(count int, pageNo int, pageSize int) Page {
+func Page(count int, pageNo int, pageSize int) Pages {
 	tp := count / pageSize
 	if count%pageSize > 0 {
 		tp = count/pageSize + 1
 	}
-	return Page{PageNo: pageNo, PageSize: pageSize, TotalPage: tp, TotalCount: count, FirstPage: pageNo == 1, LastPage: pageNo == tp}
+	return Pages{PageNo: pageNo, PageSize: pageSize, TotalPage: tp, TotalCount: count, FirstPage: pageNo == 1, LastPage: pageNo == tp}
 }

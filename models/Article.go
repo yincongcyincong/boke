@@ -2,7 +2,9 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
-	"component"
+	"kbyun/component"
+
+	"strconv"
 )
 
 type Article struct {
@@ -22,13 +24,14 @@ func GetArticleByCategory(category *Category) []*Article {
 	return articles
 }
 
-func GetArticle(size, p int, articles []*Article) {
+func GetArticle(size, p int, articles *[]*Article) component.Pages  {
 	o := orm.NewOrm()
 	var article Article
-	var source := o.Querytable(article)
-	var count := source.Limit(-1).Count()
-	source.OrderBy('Ctime').Limit(size).Offset((p-1)*size).All(&articles)
-	return component.Page(count, p, size)
+	source := o.QueryTable(article)
+	count,_ := source.Limit(-1).Count()
+	source.OrderBy("Ctime").Limit(size).Offset((p-1)*size).All(articles)
+	c, _ := strconv.Atoi(strconv.FormatInt(count, 10))
+	return component.Page(c, p, size)
 }
 
 func GetArticleByAid(aid int) Article {

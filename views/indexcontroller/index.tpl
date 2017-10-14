@@ -1,9 +1,9 @@
 
 <div id="site_content">
   <div class="sidebar">
-    <h1>PHP</h1>
-    <h5>2010-01-01</h5>
-    <p>PHP是世界上最好的语言<br /><a href="#">Read more</a></p>
+    <h4>一个瓜皮打代码</h4>
+    <h5>2016-09-01</h5>
+    <p>不引战，不BB<br /></p>
     <h1>文章分类</h1>
     <ul>
 	{{range .category}}
@@ -23,7 +23,7 @@
 	{{range .article }}
         <a href="/page?aid={{.Id}}">
             <h1>{{.Title}}</h1>
-            <p>{{.Content}}</p>
+            <p class="article" >{{.Content}}</p>
         </a>
 	{{if $.isMaster}}
         <button class="button">编辑</button>
@@ -39,8 +39,8 @@
   $(function () {
     $("#tab_{{.S}}").addClass("active");
     $("#page").bootstrapPaginator({
-      currentPage: '{{.Page.PageNo}}',
-      totalPages: '{{.Page.TotalPage}}',
+      currentPage: '{{.page.PageNo}}',
+      totalPages: '{{.page.TotalPage}}',
       bootstrapMajorVersion: 3,
       size: "small",
       onPageClicked: function(e,originalEvent,type,page){

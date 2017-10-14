@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	//"fmt"
+	"fmt"
 	"kbyun/models"
 	"regexp"
 	"strconv"
@@ -30,9 +30,9 @@ func (c *IndexController) Index() {
 		category := models.Category{Id: cid}
 		articles = models.GetArticleByCategory(&category)
 	} else {
-		var articles []*model.Article
-		c.Data["page"] = models.GetArticle(1, p, article)
+		c.Data["page"] = models.GetArticle(1, p, &articles)
 	}
+	fmt.Println(c.Data["page"])
 	c.Data["category"] = models.GetCategory()
 	for index, data := range articles {
 		re, _ := regexp.Compile("\\<[\\S\\s]+?\\>")
