@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
+	"component"
 )
 
 type Article struct {
@@ -21,14 +22,13 @@ func GetArticleByCategory(category *Category) []*Article {
 	return articles
 }
 
-func GetArticle(size, p int) []*Article {
+func GetArticle(size, p int, articles []*Article) {
 	o := orm.NewOrm()
 	var article Article
-	var articles []*Article
 	var source := o.Querytable(article)
 	var count := source.Limit(-1).Count()
 	source.OrderBy('Ctime').Limit(size).Offset((p-1)*size).All(&articles)
-	return articles
+	return component.Page(count, p, size)
 }
 
 func GetArticleByAid(aid int) Article {

@@ -37,13 +37,19 @@
 <script type="text/javascript" src="/static/js/bootstrap-paginator.min.js"></script>
 <script type="text/javascript">
   $(function () {
+    $("#tab_{{.S}}").addClass("active");
     $("#page").bootstrapPaginator({
-      currentPage: '1',
-      totalPages: '2',
+      currentPage: '{{.Page.PageNo}}',
+      totalPages: '{{.Page.TotalPage}}',
       bootstrapMajorVersion: 3,
       size: "small",
       onPageClicked: function(e,originalEvent,type,page){
-          window.location.href = "?p=" + page
+        var s = {{.S}};
+        if (s > 0) {
+          window.location.href = "/?p=" + page + "&s={{.S}}"
+        } else {
+          window.location.href = "/?p=" + page
+        }
       }
     });
   });
