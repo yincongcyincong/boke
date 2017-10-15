@@ -4,7 +4,7 @@
     <h4>一个瓜皮打代码</h4>
     <h5>2016-09-01</h5>
     <p>不引战，不BB<br /></p>
-    <h1>文章分类</h1>
+    <h3>文章分类</h3>
     <ul>
 	{{range .category}}
       <li><a href="#">{{.TypeName}}</a></li>
@@ -12,7 +12,7 @@
     </ul>
     <h1>Search</h1>
     <form method="post" action="#" id="search_form">
-      <p>
+      <p style="width:190px;">
         <input class="search" type="text" name="search_field" placeholder="Enter keywords....." />
         <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="./static/css/search.png" alt="Search" title="Search" />
       </p>

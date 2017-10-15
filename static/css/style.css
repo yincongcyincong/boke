@@ -216,9 +216,18 @@ ul#menu li a:hover
 { text-align: center;
   width: 70%;
 margin-left:5%;
-background-color:#fff;
+background-color:#F6F6F0;
   padding: 0;}
-
+.detail p{
+	word-wrap:break-word
+}
+.side{
+	width: 858px;
+    overflow: hidden;
+    margin: 0 auto 0 auto;
+    padding: 10px 20px 20px 20px;
+	background: #F6F6F0 url(back.png) repeat-y;
+}
 #content ul
 { margin: 2px 0 22px 0px;}
 
