@@ -7,13 +7,13 @@
     <h3>文章分类</h3>
     <ul>
 	{{range .category}}
-      <li><a href="#">{{.TypeName}}</a></li>
+      <li><a href="/?cid={{.Id}}">{{.TypeName}}</a></li>
 	{{end}}
     </ul>
     <h1>Search</h1>
     <form method="post" action="#" id="search_form">
       <p style="width:190px;">
-        <input class="search" type="text" name="search_field" placeholder="Enter keywords....." />
+        <input class="search" type="text" name="search_field" placeholder="检索" />
         <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="./static/css/search.png" alt="Search" title="Search" />
       </p>
     </form>

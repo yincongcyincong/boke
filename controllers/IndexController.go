@@ -28,7 +28,7 @@ func (c *IndexController) Index() {
 			panic(err)
 		}
 		category := models.Category{Id: cid}
-		articles = models.GetArticleByCategory(&category)
+		c.Data["page"] = models.GetArticleByCategory(&category, &articles)
 	} else {
 		c.Data["page"] = models.GetArticle(1, p, &articles)
 	}
