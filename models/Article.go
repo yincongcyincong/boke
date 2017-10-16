@@ -17,21 +17,22 @@ type Article struct {
 	Content    string `orm:"type(text)"`
 }
 
-func GetArticleByCategory(category *Category, articles *[]*Articles) []*Article {
+func GetArticleByCategory(category *Category, articles *[]*Article, size, p int) component.Pages {
 	o := orm.NewOrm()
 	var article Article
 	source := o.QueryTable(article)
-	count, _ := source.Limit(-1).Count()
+	count, _ := source.Limit(-1).Filter("Category", category).Count()
 	source.RelatedSel().OrderBy("Ctime").Filter("Category", category).Limit(size).Offset((p - 1) * size).All(articles)
+	c, _ := strconv.Atoi(strconv.FormatInt(count, 10))
 	return component.Page(c, p, size)
 }
 
-func GetArticle(size, p int, articles *[]*Article) component.Pages {
+func GetArticle(size, p int, articles *[]*Article, keyword string) component.Pages {
 	o := orm.NewOrm()
 	var article Article
 	source := o.QueryTable(article)
-	count, _ := source.Limit(-1).Count()
-	source.OrderBy("Ctime").Limit(size).Offset((p - 1) * size).All(articles)
+	count, _ := source.Filter("title__icontains", keyword).Limit(-1).Count()
+        source.OrderBy("Ctime").Filter("title__icontains", keyword).Limit(size).Offset((p - 1) * size).All(articles)
 	c, _ := strconv.Atoi(strconv.FormatInt(count, 10))
 	return component.Page(c, p, size)
 }

@@ -18,10 +18,8 @@
   </div>
   <div id="content">
     <div class="detail">
-        <h1>123</h1>
-        <p class="article" >sdfsqweqwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdffsfsafsdfsdfasfdsfsdfsfsfsfffsdfsdfsfsdfsfsfsdfsdfsfsfsdf</p>
-        <p class="article" >sdfsdffsfsafsdfsdfasfdsfsdfsfsfsfffsdfsdfsfsdfsfsfsdfsdfsfsfsdf</p>
-        <p class="article" >sdfsdffsfsafsdfsdfasfdsfsdfsfsfsfffsdfsdfsfsdfsfsfsdfsdfsfsfsdf</p>
+        <h1>{{.Article.Title}}</h1>
+	{{str2html .Article.Content}}
     </div>
   </div>
 </div>

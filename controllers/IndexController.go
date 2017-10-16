@@ -16,6 +16,8 @@ type IndexController struct {
 
 func (c *IndexController) Index() {
 	id := c.Ctx.Input.Query("cid")
+	keyword := c.Ctx.Input.Query("keyword")
+	c.Data["keyword"] = keyword
 	p, _ := strconv.Atoi(c.Ctx.Input.Query("p"))
 	c.Data["S"] = p
 	if p == 0 {
@@ -28,16 +30,16 @@ func (c *IndexController) Index() {
 			panic(err)
 		}
 		category := models.Category{Id: cid}
-		c.Data["page"] = models.GetArticleByCategory(&category, &articles)
+		c.Data["page"] = models.GetArticleByCategory(&category, &articles, 1, p)
 	} else {
-		c.Data["page"] = models.GetArticle(1, p, &articles)
+		c.Data["page"] = models.GetArticle(1, p, &articles, keyword)
 	}
 	fmt.Println(c.Data["page"])
 	c.Data["category"] = models.GetCategory()
 	for index, data := range articles {
 		re, _ := regexp.Compile("\\<[\\S\\s]+?\\>")
 		data.Content = re.ReplaceAllString(data.Content, "")
-		data.Content = data.Content[0:300]
+		data.Content = data.Content[0:1]
 		ctime, _ := strconv.ParseInt(data.Ctime, 10, 64)
 		data.Ctime = time.Unix(ctime, 0).Format("2006-01-02 15:04:05")
 		articles[index] = data

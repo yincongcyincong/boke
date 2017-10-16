@@ -219,7 +219,8 @@ margin-left:5%;
 background-color:#F6F6F0;
   padding: 0;}
 .detail p{
-	word-wrap:break-word
+	word-wrap:break-word;
+	text-align:left;
 }
 .side{
 	width: 858px;
