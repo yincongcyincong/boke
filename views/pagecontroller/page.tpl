@@ -6,15 +6,15 @@
     <p>不引战，不BB<br /></p>
     <h3>文章分类</h3>
     <ul>
-      <li><a href="#">123</a></li>
+      	{{range .category}}
+      	<li><a href="/?cid={{.Id}}">{{.TypeName}}</a></li>
+		{{end}}
     </ul>
     <h1>Search</h1>
-    <form method="post" action="#" id="search_form">
       <p style="width:190px;">
         <input class="search" type="text" name="search_field" placeholder="Enter keywords....." />
-        <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="./static/css/search.png" alt="Search" title="Search" />
+        <input name="search" type="image" onclick="search()" style="border: 0; margin: 0 0 -9px 5px;" src="./static/css/search.png" alt="Search" title="Search" />
       </p>
-    </form>
   </div>
   <div id="content">
     <div class="detail">
@@ -36,9 +36,9 @@
 		{{if .Member}}
             <div>你好， 123</div>
 		{{else}}
-		<span>帐号：</span><input class="contact" type="text" name="your_name" value="" /></p>
-            <p><span>密码：</span><input class="contact" type="text" name="your_email" value="" /></p>
-            <button class="button">登录</button>
+		<span>帐号：</span><input class="contact" type="text" name="username" value="" /></p>
+            <p><span>密码：</span><input class="contact" type="password" name="password" value="" /></p>
+            <button class="button" onclick="login()">登录</button>
 
 		{{end}}
         </div>
@@ -48,3 +48,44 @@
 	{{end}}
     </div>
 </div>
+
+<script>
+	function search(keyword){
+		var keyword = $("input[name=keyword]").val()
+		window.location.href="/?keyword="+keyword
+	}
+	
+	var loginLock = false
+	function login(){
+		if (loginLock){
+			return ;
+		}
+		var username = $("input[name=username]").val();
+		var password = $("input[name=password]").val();
+		if(username == ""){
+			alert("用户名不能为空")
+			return ;
+		}
+		if(password == ""){
+			alert("密码不能为空")
+			return ;
+		}
+		loginLock = true;
+		$.ajax({
+	        type: "POST",
+	        cache: false,
+	        url: "/login",
+	        data:{username: username, password: password},
+	        dataType: 'json',
+	        success: function (obj) {
+	            loginLock = false;
+				console.log(obj)
+	        },
+			error: function(obj){
+				console.log(obj)
+			}
+	    });
+	}
+	
+	
+</script>

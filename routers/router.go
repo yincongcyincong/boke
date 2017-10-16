@@ -2,13 +2,13 @@ package routers
 
 import (
 	"kbyun/controllers"
+
 	"github.com/astaxie/beego"
 )
 
 func init() {
-    beego.Router("/", &controllers.IndexController{}, "get:Index")
-    beego.Router("/page", &controllers.PageController{}, "get:Index")
-    //beego.Router("/index/del", &controllers.IndexController{}, "post:del")
+	beego.Router("/", &controllers.IndexController{}, "get:Index")
+	beego.Router("/page", &controllers.PageController{}, "get:Index")
+	beego.Router("/login", &controllers.PageController{}, "post:login")
+	//beego.Router("/index/del", &controllers.IndexController{}, "post:del")
 }
-
-

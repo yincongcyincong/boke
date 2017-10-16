@@ -9,3 +9,11 @@ type Users struct {
 	Nickname string `orm:"size(32)"`
 	Role     int    `orm:"size(1)"`
 }
+
+func GetPasswordByUsername(username string) *Users {
+	user := Users{Username: username}
+	var data Users
+	o := orm.NewOrm()
+	o.QueryTable("").Filter("User", user).one(&data)
+	return data
+}
