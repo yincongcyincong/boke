@@ -6,13 +6,13 @@
     <p>不引战，不BB<br /></p>
     <h3>文章分类</h3>
     <ul>
-      	{{range .category}}
+      	{{range .Category}}
       	<li><a href="/?cid={{.Id}}">{{.TypeName}}</a></li>
 		{{end}}
     </ul>
-    <h1>Search</h1>
+    <h3>搜索</h3>
       <p style="width:190px;">
-        <input class="search" type="text" name="search_field" placeholder="Enter keywords....." />
+        <input class="search" type="text" name="keyword" placeholder="搜索内容" />
         <input name="search" type="image" onclick="search()" style="border: 0; margin: 0 0 -9px 5px;" src="./static/css/search.png" alt="Search" title="Search" />
       </p>
   </div>
@@ -28,13 +28,13 @@
     <p>评论区</p>
     <div style="border-bottom:1px solid #A9A9A9 ;width:600px;">
        <p style="padding:0px 0px 0px 0px; color:#d32;">123</p>
-       <span>123123</span><br>
+       <span>1</span><br>
        <span style="font-size: 12px;margin-right: 8px;color: #999;">123123</span>
     </div>
     <div style="margin-top:30px;">
         <div class="form_settings" style="margin-bottom:10px;">
-		{{if .Member}}
-            <div>你好， 123</div>
+		{{if or .Member .Master}}
+            <div>你好， {{.Member.Nickname}} </div>
 		{{else}}
 		<span>帐号：</span><input class="contact" type="text" name="username" value="" /></p>
             <p><span>密码：</span><input class="contact" type="password" name="password" value="" /></p>
@@ -42,7 +42,7 @@
 
 		{{end}}
         </div>
-	{{if .Member}}
+	{{if or .Member .Master}}
         <textarea rows="8" cols="50" name="name"></textarea><br>
         <button class="button">发表评论</button>
 	{{end}}
@@ -79,7 +79,12 @@
 	        dataType: 'json',
 	        success: function (obj) {
 	            loginLock = false;
-				console.log(obj)
+		    if (obj.Code == "200"){
+			alert("登录成功")
+			location.reload()
+		    } else{
+			alert(obj.Content)
+		    }
 	        },
 			error: function(obj){
 				console.log(obj)

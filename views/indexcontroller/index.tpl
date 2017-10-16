@@ -10,7 +10,7 @@
       <li><a href="/?cid={{.Id}}">{{.TypeName}}</a></li>
 	{{end}}
     </ul>
-    <h1>Search</h1>
+    <h3>搜索</h3>
       <p style="width:190px;">
         <input class="search" type="text" value="{{.keyword}}"  name="keyword" placeholder="检索" />
         <input name="search" type="image" onclick="search()"  style="border: 0; margin: 0 0 -9px 5px;" src="./static/css/search.png" alt="Search" title="Search" />
@@ -24,7 +24,7 @@
             <p class="article" >{{.Content}}</p>
         </a>
 	{{if $.isMaster}}
-        <button class="button">编辑</button>
+        <button class="button" onclick="update({{.Id}})">编辑</button>
 	{{end}}
         <span style="font-size: 12px;margin-right: 8px;color: #999; float:right;">{{.Ctime}}</span>
 	{{end}}
@@ -37,14 +37,16 @@
   $(function () {
     $("#tab_{{.S}}").addClass("active");
 	var keyword = $("input[name=keyword]").val();
+	var cid = {{.cid}}
+	console.log(cid)
     $("#page").bootstrapPaginator({
       currentPage: '{{.page.PageNo}}',
       totalPages: '{{.page.TotalPage}}',
       bootstrapMajorVersion: 3,
       size: "small",
       onPageClicked: function(e,originalEvent,type,page){
-        if (keyword != "") {
-          window.location.href = "/?p=" + page + "&keyword="+keyword
+        if (keyword != "" || cid != "") {
+          window.location.href = "/?p=" + page + "&keyword="+keyword+"&cid="+cid
         } else {
           window.location.href = "/?p=" + page
         }
@@ -55,5 +57,9 @@
 	function search(keyword){
 		var keyword = $("input[name=keyword]").val()
 		window.location.href="/?keyword="+keyword
+	}
+	
+	function update(id){
+		window.location.href="/update?id="+id
 	}
 </script>
