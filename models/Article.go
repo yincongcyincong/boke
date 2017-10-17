@@ -32,7 +32,7 @@ func GetArticle(size, p int, articles *[]*Article, keyword string) component.Pag
 	var article Article
 	source := o.QueryTable(article)
 	count, _ := source.Filter("title__icontains", keyword).Limit(-1).Count()
-        source.OrderBy("Ctime").Filter("title__icontains", keyword).Limit(size).Offset((p - 1) * size).All(articles)
+	source.OrderBy("Ctime").Filter("title__icontains", keyword).Limit(size).Offset((p - 1) * size).All(articles)
 	c, _ := strconv.Atoi(strconv.FormatInt(count, 10))
 	return component.Page(c, p, size)
 }
@@ -43,4 +43,16 @@ func GetArticleByAid(aid int) Article {
 	var data Article
 	o.QueryTable(article).One(&data)
 	return data
+}
+
+func UpdateArticle(id, categoryId int, title, content string) int {
+	o := orm.NewOrm()
+	res := o.Raw("update article set category_id = ?, content = ?, title = ? where id = ?", categoryId, content, title)
+	return res
+}
+
+func InsertArticle(categoryId int, title, content string) {
+	o := orm.NewOrm()
+	res := o.Raw("insert into article(category_id, title, contentn) value(?, ?, ?)", categoryId, title, content)
+	return res
 }

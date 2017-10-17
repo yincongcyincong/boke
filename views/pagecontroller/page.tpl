@@ -79,12 +79,12 @@
 	        dataType: 'json',
 	        success: function (obj) {
 	            loginLock = false;
-		    if (obj.Code == "200"){
-			alert("登录成功")
-			location.reload()
-		    } else{
-			alert(obj.Content)
-		    }
+			    if (obj.Code == "200"){
+					alert("登录成功")
+					location.reload()
+			    } else{
+					alert(obj.Content)
+			    }
 	        },
 			error: function(obj){
 				console.log(obj)
