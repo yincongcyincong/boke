@@ -45,14 +45,25 @@ func GetArticleByAid(aid int) Article {
 	return data
 }
 
-func UpdateArticle(id, categoryId int, title, content string) int {
+func UpdateArticle(id, categoryId int, title, content string) int64 {
 	o := orm.NewOrm()
-	res := o.Raw("update article set category_id = ?, content = ?, title = ? where id = ?", categoryId, content, title)
-	return res
+	res, err := o.Raw("update article set category_id = ?, content = ?, title = ? where id = ?", categoryId, content, title).Exec()
+	if err == nil {
+		num, _ := res.RowsAffected()
+		return num
+	} else {
+		return 0
+	}
 }
 
-func InsertArticle(categoryId int, title, content string) {
+func InsertArticle(categoryId int, title, content string) int64 {
 	o := orm.NewOrm()
-	res := o.Raw("insert into article(category_id, title, contentn) value(?, ?, ?)", categoryId, title, content)
-	return res
+	res, err := o.Raw("insert into article(category_id, title, content) value(?, ?, ?)", categoryId, title, content).Exec()
+	if err == nil {
+                num, _ := res.RowsAffected()
+		return num
+        } else {
+                return 0
+        }
 }
+

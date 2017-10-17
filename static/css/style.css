@@ -222,6 +222,9 @@ background-color:#F6F6F0;
 	word-wrap:break-word;
 	text-align:left;
 }
+#edui1{
+	height:400px !important;
+}
 .side{
 	width: 858px;
     overflow: hidden;
@@ -347,6 +350,3 @@ table tr td
   color: #47433F;
   border-top: 1px solid #FFF;}
 
-#article {
-  height:800px;
-}
